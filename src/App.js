@@ -2,7 +2,7 @@ import {  Route, Routes } from 'react-router-dom';
 import './App.css';
 import AllMeetups from './pages/AllMeetups';
 import FavoriteMeetups from './pages/FavoriteMeetups';
-import NewMeetups from './pages/Newmeetups';
+import NewMeetup from './pages/Newmeetup';
 import Layout from './components/layout/Layout';
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<AllMeetups/>}></Route>
-          <Route path="/new-meetups" element={<NewMeetups/>}></Route>
+          <Route path="/new-meetups" element={<NewMeetup/>}></Route>
           <Route path="/favs" element={<FavoriteMeetups/>}></Route>
           {/* <Route path="/" element={<AllMeetups/>}></Route>
           <Route path="/" element={<AllMeetups/>}></Route> */}
