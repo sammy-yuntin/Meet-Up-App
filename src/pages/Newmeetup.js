@@ -1,7 +1,10 @@
 import React from "react";
 import NewMeetupForm from "../components/meetups/NewMeetupForm";
+import {useNavigate} from "react-router-dom"
 
 function NewMeetup(){
+    
+    const history = useNavigate();
 
     function addMeetupHandler(meetupData){
         fetch("https://second-attempt-for-meetupapp-default-rtdb.firebaseio.com/meetups.json", 
@@ -12,7 +15,10 @@ function NewMeetup(){
                     'Content-Type':'application/json'
                 }
             }
-        );
+        ).then( function thenHandler() {
+            history("/");
+            alert("Data Submitted")
+        });
     }
 
     return(
