@@ -1,7 +1,8 @@
 import React from "react";
 import MeetupList  from "../components/meetups/MeetupList";
+import {useState,useEffect} from "react"
 
-const DummyData = [
+/* const DummyData = [
     {
         id:"m1",
         title:"This is a first meetup",
@@ -16,13 +17,48 @@ const DummyData = [
         description: "This is a second meetup which you definitely should not miss. it will be very interesting",
         image: "https://scontent.flos1-1.fna.fbcdn.net/v/t39.30808-6/317489355_527688106047701_8382225895082380340_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeEH9gwJGr6ZTnAV-bdkgJNBWmQA2vYor5haZADa9iivmBnXqFh2MqcIjaHzcR7IXQYexbpabPJf9V_b9vEPQwTs&_nc_ohc=1O7pBSwpGEAAX-MZ8he&_nc_zt=23&_nc_ht=scontent.flos1-1.fna&oh=00_AfBVdrRurAy-JtdqEOh9OvJYLVsC1LzwIXdhxFj__QpMCg&oe=638EE585"
     }
- ]
+ ] */
 
 function AllMeetups(){
+    const [loadedMeetups,setLoadedMeetups] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(()=>{
+
+        fetch(
+            "https://second-attempt-for-meetupapp-default-rtdb.firebaseio.com/meetups.json"
+            ).then((response) => {
+               return response.json();
+            })
+            .then((data) => {
+
+                 //tranform the gotten data to an array!
+                const meetups = [];
+
+                for (const key in data){
+                    const meetup = {
+                        id : key,
+                        ...data[key]
+                    };
+
+                    meetups.push(meetup);
+                }
+                setIsLoading(false);
+                setLoadedMeetups(meetups);
+            });
+    },[]);
+    
+    if (isLoading){
+            return(
+                <section>
+                    <p>Loading.....</p>
+                </section>
+            )
+        }
     return(
         <section>
             <h1>AllMeetups page</h1>
-            <MeetupList meetups={DummyData}/>
+            <MeetupList meetups={loadedMeetups}/>
             {/*  {[<ul ><li  key = {DummyData.id}>Item 1</li><li>Item 2</li> <li>Item 3</li></ul>]} */}
         </section>
     )
