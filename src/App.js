@@ -1,7 +1,7 @@
 import {  Route, Routes } from 'react-router-dom';
 import './App.css';
 import AllMeetups from './pages/AllMeetups';
-import FavoriteMeetups from './pages/FavoriteMeetups';
+import FavoriteMeetups from './pages/Favorites';
 import NewMeetup from './pages/Newmeetup';
 import Layout from './components/layout/Layout';
 
